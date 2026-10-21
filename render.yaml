@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: csc325-module8-cicd
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+    startCommand: gunicorn csc325.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: "3.12.3"
