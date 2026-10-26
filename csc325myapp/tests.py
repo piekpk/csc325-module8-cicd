@@ -19,3 +19,7 @@ class HealthEndpointTests(TestCase):
         response = self.client.get("/api/hello/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["message"], "Hello, world!")
+
+    def test_health_returns_version(self):
+        response = self.client.get("/api/health/")
+        self.assertEqual(response.data["version"], "1.1")
